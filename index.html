@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="./rosePlayer.css" />
+		<script type="text/javascript" src="./rosePlayer.js" ></script>
+	</head>
+	<body>
+		<div id="rplayer"></div>
+		<script>
+			var rp = new rplayer({
+			    element: document.getElementById("rplayer"),
+			    autoPlay: 0,/*是否开启自动播放,默认false*/
+			    listFolded:1, /*列表是否折叠，默认false*/
+			    listMaxHeight:300, /*列表最大高度，默认240*/
+			    musics: [{
+			        title: "讲真的",
+			        author: "曾惜",
+			        url: "http://music.163.com/song/media/outer/url?id=30987293.mp3",
+			        pic: "http://p1.music.126.net/cd9tDyVMq7zzYFbkr0gZcw==/2885118513459477.jpg?param=300x300",
+			    },{
+			        title: "暧昧",
+			        author: "薛之谦",
+			        url: "http://music.163.com/song/media/outer/url?id=471385043.mp3",
+			        pic: "http://p1.music.126.net/fNbj5uDwltSDLbETdnEYYQ==/109951163069265719.jpg?param=300x300",
+			    },{
+			        title: "That Girl",
+			        author: "Olly Murs",
+			        url: "http://music.163.com/song/media/outer/url?id=440208476.mp3",
+			        pic: "http://p1.music.126.net/_dPhSlbDz23MjXUEYeBGRw==/18820340533734696.jpg?param=300x300",
+			    },{
+			        title: "云烟成雨",
+			        author: "房东的猫",
+			        url: "http://music.163.com/song/media/outer/url?id=513360721.mp3",
+			        pic: "http://p1.music.126.net/DSTg1dR7yKsyGq4IK3NL8A==/109951163046050093.jpg?param=300x300",
+			    },{
+			        title: "后来",
+			        author: "刘若英",
+			        url: "http://music.163.com/song/media/outer/url?id=254574.mp3",
+			        pic: "http://p1.music.126.net/eBF7bHnJYBUfOFrJ_7SUfw==/109951163351825356.jpg?param=300x300",
+			    },{
+			        title: "水手",
+			        author: "郑智化",
+			        url: "http://music.163.com/song/media/outer/url?id=190381.mp3",
+			        pic: "http://p1.music.126.net/_pXP5r15lQW2iRhucclG9w==/52776558150323.jpg?param=300x300",
+			    }]
+			});
+			rp.init();
+		</script>
+	</body>
+</html>
