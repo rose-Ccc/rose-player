@@ -53,6 +53,6 @@ var rp = new rplayer({
 rp.init();
 ```
 ### 效果图
-<img src="http://rose-ccc.gitee.io/imgbed/rosePlayer/1.png" width = "180px" align=“center”></img>
-<img src="http://rose-ccc.gitee.io/imgbed/rosePlayer/3.png" width = "180px" align=“center”></img>
-<img src="http://rose-ccc.gitee.io/imgbed/rosePlayer/2.png" width = "180px" align=“center”></img>
+<img src="http://rose-ccc.gitee.io/imgbed/rosePlayer/1.png" width = "185px" align=“center”></img>
+<img src="http://rose-ccc.gitee.io/imgbed/rosePlayer/3.png" width = "185px" align=“center”></img>
+<img src="http://rose-ccc.gitee.io/imgbed/rosePlayer/2.png" width = "185px" align=“center”></img>
