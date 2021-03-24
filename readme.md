@@ -10,7 +10,7 @@
 1. play
 2. pause
 3. updateBar
-4. secondToTime
+4. secondToTime  
 用法请阅读源码
 
 ### 用法
