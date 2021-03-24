@@ -111,6 +111,7 @@ rplayer.prototype.init = function() {
 	})
 	// 监听下载情况
 	this.audio.addEventListener("loadedmetadata", function() {
+		console.log('开始缓存')
 		p.loadedTime = setInterval(function() {
 			// buffered 表示已下载缓存的时间范围
 			// buffered 为 TimeRanges对象，有end(index)函数 - 获得某个已缓冲范围的结束位置
@@ -193,7 +194,7 @@ rplayer.prototype.init = function() {
 	// 获取 隐藏播放界面、展示播放界面（fixed时才有） 按钮标签
 	this.hidePlayerButton = this.element.getElementsByClassName("r-icon-chevron-left")[0];
 	this.showPlayerButton = this.element.getElementsByClassName("r-icon-chevron-right")[0];
-	// 获取 歌词列表的子标签
+	// 获取 歌曲列表的子标签
 	this.musicList = this.element.getElementsByClassName("rplayer-list")[0].getElementsByTagName("li");
 	// 获取 进度条、加载条、进度条控制球、完整进度条 标签
 	this.playedBar = this.element.getElementsByClassName("rplayer-played")[0];
@@ -299,9 +300,9 @@ rplayer.prototype.init = function() {
 	this.thumb.addEventListener("mousedown", function() {
 		// 进度条总宽度
 		y = p.bar.clientWidth;
-		// 停止时间、进度条、歌词更新
+		// 停止时间、进度条更新
 		clearInterval(p.playedTime);
-		// 监听鼠标移动事件，更改相应样式、歌词、时间
+		// 监听鼠标移动事件，更改相应样式、时间
 		document.addEventListener("mousemove", e);
 		// 监听鼠标抬起事件，移除监听事件
 		document.addEventListener("mouseup", a)
@@ -368,7 +369,7 @@ rplayer.prototype.init = function() {
 		p.audio.currentTime = parseFloat(p.playedBar.style.width) / 100 * p.audio.duration;
 	}
 
-	// 更新进度条、歌词、时间
+	// 更新进度条、时间
 	function mvb(i) {
 		i = i > 0 ? i : 0;
 		i = 1 > i ? i : 1;
@@ -436,44 +437,8 @@ rplayer.prototype.init = function() {
 	function voa() {
 		document.removeEventListener("mousemove", voe);
 	}
-	// 歌词格式化函数，原始的格式如下：
-	// "[00:00.00] 作曲 : 薛之谦[00:01.00] 作词 : 薛之谦"
-	function l(e) {
-		if (e) {
-			// 歌词格式化为数组，每一个元素包括一个时间，一句歌词
-			// 循环这个数组
-			for (var t = (e = e.replace(/([^\]^\n])\[/g, function(e, t) {
-					return t + "\n["
-				})).split("\n"), n = [], i = t.length, a = 0; a < i; a++) {
-				// 匹配歌词数组中的时间，并将时间赋值给 r
-				var r = t[a].match(/\[(\d{2}):(\d{2})(\.(\d{2,3}))?]/g),
-					// 将歌词中的时间去除，并将歌词赋值给 o (获取的歌词的时间格式可能不一样，所以用了三种匹配方式来去除)
-					o = t[a].replace(/.*\[(\d{2}):(\d{2})(\.(\d{2,3}))?]/g, "").replace(/<(\d{2}):(\d{2})(\.(\d{2,3}))?>/g, "").replace(
-						/^\s+|\s+$/g, "");
-				// 若匹配到时间，进行时间数据提取
-				if (r) {
-					// 这里删除了我认为不必要的循环
-					// 分组查询的正则表达式特征，带有括号，所得值为数组
-					// 所以这里 u[0] 表示选取的字符串，
-					// u[1] 表示第一个分组 00 (\d{2})
-					// u[2] 表示第二个分组 00 (\d{2})
-					// u[3] 表示第三个分组 .00 (\d{2,3}))
-					// u[4] 表示第四个分组,即第三个分组的子分组 00 \d{2,3})
-					// parseInt(u[4]) / (2 === (u[4] + "").length ? 100 : 1e3 若毫秒数为两位数，则除100，否则1000（1e3表示10的三次方）
-					var u = /\[(\d{2}):(\d{2})(\.(\d{2,3}))?]/.exec(r[0]),
-						c = 60 * u[1] + parseInt(u[2]) + (u[4] ? parseInt(u[4]) / (2 === (u[4] + "").length ? 100 : 1e3) : 0);
-					// c表示时间，o表示歌词
-					n.push([c, o])
-				}
-
-			}
-			return n
-		}
-		return [
-			[0, "暂无歌词，请您欣赏"]
-		]
-	}
-
+	
+	// 通过该函数来保存音量大小
 	function setCookie(cname, cvalue, exdays) {
 		var d = new Date();
 		d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
@@ -574,7 +539,7 @@ rplayer.prototype.init = function() {
 		playSwitch(cur_m)
 	}
 }
-// 播放音乐 更新歌词、进度条、时间
+// 播放音乐 进度条、时间
 // 用于点击播放按钮播放音乐，点击进度条播放音乐
 rplayer.prototype.play = function() {
 	this.PlayButton.classList.add("display-none"); // 隐藏播放按钮
